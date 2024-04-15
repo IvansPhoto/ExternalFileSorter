@@ -20,12 +20,11 @@ public static class FileGenerator
         "Teal", "Maroon", "Navy", "Indigo", "Gold"
     ];
 
-    public static void GenerateFile(int lineNumber, string? filePath)
+    public static void GenerateFile(int lineNumber, string filePath)
     {
         var text = $"{Fruits[Random.Shared.Next(Fruits.Length)]} {Colours[Random.Shared.Next(Colours.Length)]}";
         using var outputFile = new StreamWriter(
-            Path.Combine(filePath ?? Directory.GetCurrentDirectory(),
-                $"{lineNumber:###_###_###_###_000}.txt")
+            Path.Combine(filePath, $"{lineNumber:###_###_###_###_000}.txt")
         );
 
         for (var i = 0; i < lineNumber; i++)
@@ -48,7 +47,7 @@ public static class FileGenerator
         }
     }
 
-    public static bool GenerateFile()
+    public static void GenerateFile()
     {
         try
         {
@@ -63,17 +62,15 @@ public static class FileGenerator
             }
 
             Console.WriteLine("File path:");
-            var filePath = Console.ReadLine();
+            var filePath = Console.ReadLine() ?? Directory.GetCurrentDirectory();
 
             GenerateFile(number, filePath);
 
             Console.WriteLine("File generated successfully");
-            return true;
         }
         catch (Exception exception)
         {
             Console.WriteLine($"File generated with errors: {exception}");
-            return false;
         }
     }
 }
