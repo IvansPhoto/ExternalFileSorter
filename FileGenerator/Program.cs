@@ -1,0 +1,1 @@
+﻿FileGenerator.FileGenerator.GenerateFile();
